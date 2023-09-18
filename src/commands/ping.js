@@ -5,7 +5,7 @@ const data = new SlashCommandBuilder()
     .setDescription('Replies with PONG');
 
 async function execute(interation) {
-    interation.reply('PONG');
+    await interation.reply('PONG!');
 }
 
 module.exports = {
