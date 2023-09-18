@@ -19,7 +19,7 @@ const client = new Client({
 
 client.commands = new Collection();
 
-client.commands.set = (pingCommand.data.name, pingCommand);
+client.commands.set(pingCommand.data.name, pingCommand);
 
 client.on(Events.ClientReady, clientReadyHandler);
 
