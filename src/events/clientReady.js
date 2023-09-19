@@ -9,7 +9,7 @@ async function clientReadyHandler(client) {
     console.log(`Logged in as ${client.user.tag}!`);
 
     try {
-        console.log(`Started refreshing ${client.commands.length} commands.`);
+        console.log(`Started refreshing ${client.commands.size} commands.`);
 
         const data = await rest.put(
             Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
