@@ -7,7 +7,7 @@ const data = new SlashCommandBuilder()
 async function execute(interation) {
     await interation.reply('PONG!');
 
-    throw new Error('OH NO!!!');
+    // throw new Error('OH NO!!!');
 }
 
 module.exports = {
