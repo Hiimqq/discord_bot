@@ -22,7 +22,7 @@ client.commands = new Collection();
 
 client.commands.set(pingCommand.data.name, pingCommand);
 
-client.on(Events.ClientReady, clientReadyHandler);
+client.once(Events.ClientReady, clientReadyHandler);
 
 client.on(Events.InteractionCreate, interactionCreateHandler)
 
