@@ -24,6 +24,6 @@ client.commands.set(pingCommand.data.name, pingCommand);
 
 client.once(Events.ClientReady, clientReadyHandler);
 
-client.on(Events.InteractionCreate, interactionCreateHandler)
+client.on(Events.InteractionCreate, interactionCreateHandler);
 
 client.login(process.env.DISCORD_TOKEN);
