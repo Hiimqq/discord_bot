@@ -1,10 +1,10 @@
 const axios = require('axios');
 
-const URL =  'http://api.weatherapi.com/v1/forecast.json';
+const URL =  'https://api.weatherapi.com/v1/forecast.json';
 const FORECAST_DAYS = 3;
 
 async function fetchForecast(location) {
-    await axios ({
+    return await axios ({
         url: URL,
         method: 'get',
         params: {
@@ -14,7 +14,7 @@ async function fetchForecast(location) {
         },
         responseType: 'json',
     })
-        .then((reponse) => {
+        .then((response) => {
             const city = response.data.location.name;
             const country = response.data.location.country;
             const region = response.data.location.region;
