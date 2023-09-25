@@ -27,11 +27,28 @@ const data = new SlashCommandBuilder()
 
 async function execute(interaction) {
     const location = interaction.options.getString('location');
-    const units = interaction.options.getString('units');
+    const units = interaction.options.getString('units') || 'imperial';
+    const isImperial = units === 'imperial';
 
     const { weatherData, locationName } = await fetchForecast(location);
 
-    const embed = new EmbedBuilder();
+    const embed = new EmbedBuilder()
+        .setColor(0x3f704d);
+        .setTitle(`Weather forecast for ${locationName}...`);
+        .setDescription(`Using the ${units} system.`);
+        .setTimestamp();
+        .setFooter({
+            text: 'Forecast from weatherapi.com' ,
+        });
+    for (const day of weatherData) {
+        const temperatureMin = isImperial ? day.temperatureMinF : day.temperatureMinC
+        const temperatureMax = isImperial ? day.temperatureMaxF : day.temperatureMaxC
+
+        embed.addFields({
+            name: day.date,
+            value: `❄️ Low: ${temperatureMin}° ❄️, 🔥 High ${temperatureMax}° 🔥`
+        });
+    }
 
     await interaction.reply('The weather is nice');
 }
