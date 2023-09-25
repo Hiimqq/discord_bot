@@ -26,6 +26,8 @@ const data = new SlashCommandBuilder()
     });
 
 async function execute(interaction) {
+    await interaction.deferReply();
+
     const location = interaction.options.getString('location');
     const units = interaction.options.getString('units') || 'imperial';
     const isImperial = units === 'imperial';
@@ -50,7 +52,7 @@ async function execute(interaction) {
         });
     }
 
-    await interaction.reply('The weather is nice');
+    await interaction.editReply('The weather is nice');
 }
 
 module.exports = {
