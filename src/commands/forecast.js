@@ -1,5 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 
+const { fetchForecast } = require('../requests/forecast');
+
 const data = new SlashCommandBuilder()
     .setName('forecast')
     .setDescription('Replies with a weather forecast.')
@@ -23,6 +25,10 @@ const data = new SlashCommandBuilder()
 async function execute(interaction) {
     const location = interaction.options.getString('location');
     const units = interaction.options.getString('units');
+
+    const { weatherData, locationName } = await fetchForecast(location);
+
+    await fetchForecast(location);
 
     await interaction.reply('The weather is nice');
 }
