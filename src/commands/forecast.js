@@ -1,4 +1,7 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { 
+    SlashCommandBuilder,
+    EmbedBuilder,
+} = require('discord.js');
 
 const { fetchForecast } = require('../requests/forecast');
 
@@ -28,7 +31,7 @@ async function execute(interaction) {
 
     const { weatherData, locationName } = await fetchForecast(location);
 
-    await fetchForecast(location);
+    const embed = new EmbedBuilder();
 
     await interaction.reply('The weather is nice');
 }
