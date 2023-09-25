@@ -1,4 +1,4 @@
-const { 
+const {
     SlashCommandBuilder,
     EmbedBuilder,
 } = require('discord.js');
@@ -32,29 +32,34 @@ async function execute(interaction) {
     const units = interaction.options.getString('units') || 'imperial';
     const isImperial = units === 'imperial';
 
-    const { weatherData, locationName } = await fetchForecast(location);
+    try {
+        const { weatherData, locationName } = await fetchForecast(location);
 
-    const embed = new EmbedBuilder()
-        .setColor(0x3f704d);
-        .setTitle(`Weather forecast for ${locationName}...`);
-        .setDescription(`Using the ${units} system.`);
-        .setTimestamp();
-        .setFooter({
-            text: 'Forecast from weatherapi.com' ,
-        });
-    for (const day of weatherData) {
-        const temperatureMin = isImperial ? day.temperatureMinF : day.temperatureMinC
-        const temperatureMax = isImperial ? day.temperatureMaxF : day.temperatureMaxC
+        const embed = new EmbedBuilder()
+            .setColor(0x3f704d);
+            .setTitle(`Weather forecast for ${locationName}...`);
+            .setDescription(`Using the ${units} system.`);
+            .setTimestamp();
+            .setFooter({
+                text: 'Forecast from weatherapi.com',
+            });
+        for (const day of weatherData) {
+            const temperatureMin = isImperial ? day.temperatureMinF : day.temperatureMinC
+            const temperatureMax = isImperial ? day.temperatureMaxF : day.temperatureMaxC
 
-        embed.addFields({
-            name: day.date,
-            value: `❄️ Low: ${temperatureMin}° ❄️, 🔥 High ${temperatureMax}° 🔥`
+            embed.addFields({
+                name: day.date,
+                value: `❄️ Low: ${temperatureMin}° ❄️, 🔥 High ${temperatureMax}° 🔥`
+            });
+        }
+
+        await interaction.editReply({
+            embeds: [embed],
         });
+    } catch (error) {
+        await interaction.editReply(error);
     }
 
-    await interaction.editReply({
-        embeds: [embed]
-    });
 }
 
 module.exports = {
