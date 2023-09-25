@@ -36,13 +36,14 @@ async function execute(interaction) {
         const { weatherData, locationName } = await fetchForecast(location);
 
         const embed = new EmbedBuilder()
-            .setColor(0x3f704d);
-            .setTitle(`Weather forecast for ${locationName}...`);
-            .setDescription(`Using the ${units} system.`);
-            .setTimestamp();
+            .setColor(0x3f704d)
+            .setTitle(`Weather forecast for ${locationName}...`)
+            .setDescription(`Using the ${units} system.`)
+            .setTimestamp()
             .setFooter({
                 text: 'Forecast from weatherapi.com',
             });
+
         for (const day of weatherData) {
             const temperatureMin = isImperial ? day.temperatureMinF : day.temperatureMinC
             const temperatureMax = isImperial ? day.temperatureMaxF : day.temperatureMaxC
