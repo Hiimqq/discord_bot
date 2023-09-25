@@ -52,7 +52,9 @@ async function execute(interaction) {
         });
     }
 
-    await interaction.editReply('The weather is nice');
+    await interaction.editReply({
+        embeds: [embed]
+    });
 }
 
 module.exports = {
